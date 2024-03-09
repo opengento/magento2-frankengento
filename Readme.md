@@ -4,6 +4,7 @@
 
 # Install step
 ```
+cp .env.sample .env
 docker compose up -d
 docker compose exec -it frankenphp bash
 cp composer.json.sample composer.json && composer install

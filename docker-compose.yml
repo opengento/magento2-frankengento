@@ -12,7 +12,6 @@ services:
     environment:
       - CADDY_GLOBAL_OPTIONS=debug
       - COMPOSER_HOME=~/.composer
-      - FRANKENPHP_CONFIG=${FRANKENPHP_CONFIG:-}
     ports:
       - "80:80" # HTTP
       - "443:443" # HTTPS
@@ -21,7 +20,7 @@ services:
       - ~/.composer:/home/franken/.composer
       - ./app/:/var/www/
       - ./conf/caddy/Caddyfile:/config/Caddyfile:ro
-      - ./conf/php/xdebug-custom.ini:/usr/local/etc/php/conf.d/xdebug-custom.ini:ro
+      - ./conf/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug-custom.ini:ro
     tty: true
     extra_hosts:
       - host.docker.internal:host-gateway
