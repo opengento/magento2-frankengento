@@ -1,2 +1,3 @@
 app/*
+.env
 !app/composer.json.sample

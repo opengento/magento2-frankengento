@@ -1,9 +1,7 @@
 version: '2.0'
-name: frankengento
 services:
-
   frankenphp:
-    image: dunglas/frankenphp
+    image: frankengento
     build:
       dockerfile: .docker/frankengento/Dockerfile
       args:
@@ -13,11 +11,14 @@ services:
     user: "${UID}:${GID}"
     environment:
       - CADDY_GLOBAL_OPTIONS=debug
+      - COMPOSER_HOME=~/.composer
+      - FRANKENPHP_CONFIG=${FRANKENPHP_CONFIG:-}
     ports:
       - "80:80" # HTTP
       - "443:443" # HTTPS
       - "443:443/udp" # HTTP/3
     volumes:
+      - ~/.composer:/home/franken/.composer
       - ./app/:/var/www/
       - ./conf/caddy/Caddyfile:/config/Caddyfile:ro
       - ./conf/php/xdebug-custom.ini:/usr/local/etc/php/conf.d/xdebug-custom.ini:ro
