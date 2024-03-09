@@ -1,0 +1,2 @@
+app/*
+!app/composer.json.sample

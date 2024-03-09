@@ -1,0 +1,58 @@
+version: '2.0'
+name: frankengento
+services:
+
+  frankenphp:
+    image: dunglas/frankenphp
+    build:
+      dockerfile: .docker/frankengento/Dockerfile
+      args:
+        - USER_ID=${UID}
+        - GROUP_ID=${GID}
+    restart: always
+    user: "${UID}:${GID}"
+    environment:
+      - CADDY_GLOBAL_OPTIONS=debug
+    ports:
+      - "80:80" # HTTP
+      - "443:443" # HTTPS
+      - "443:443/udp" # HTTP/3
+    volumes:
+      - ./app/:/var/www/
+      - ./conf/caddy/Caddyfile:/config/Caddyfile:ro
+      - ./conf/php/xdebug-custom.ini:/usr/local/etc/php/conf.d/xdebug-custom.ini:ro
+    tty: true
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    env_file: env/franken.env
+  db:
+    image: mariadb:10.6
+    command:
+      --max_allowed_packet=64M
+      --optimizer_use_condition_selectivity=1
+      --optimizer_switch="rowid_filter=off"
+    ports:
+      - "3306:3306"
+    env_file: env/db.env
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  redis:
+    image: redis:7.0-alpine
+    ports:
+      - "6379:6379"
+
+  opensearch:
+    image: markoshust/magento-opensearch:2.5-1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    env_file: env/opensearch.env
+    environment:
+      - "discovery.type=single-node"
+      - "cluster.routing.allocation.disk.threshold_enabled=false"
+      - "index.blocks.read_only_allow_delete"
+volumes:
+  caddy_data:
+  caddy_config:
+  dbdata:

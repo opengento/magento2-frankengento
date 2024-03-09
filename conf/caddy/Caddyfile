@@ -1,0 +1,70 @@
+{
+        {$CADDY_GLOBAL_OPTIONS}
+
+        frankenphp {
+                #worker /path/to/your/worker.php
+                {$FRANKENPHP_CONFIG}
+        }
+
+        # https://caddyserver.com/docs/caddyfile/directives#sorting-algorithm
+        order mercure after encode
+        order vulcain after reverse_proxy
+        order php_server before file_server
+        order php before file_server
+}
+
+{$CADDY_EXTRA_CONFIG}
+
+{$SERVER_NAME:localhost} {
+
+        log {
+            output stdout
+        }
+
+        root * pub/
+        encode zstd br gzip
+
+        #MAGENTO
+        @blocked {
+            path /media/customer/* /media/downloadable/* /media/import/* /media/custom_options/* /errors/*
+        }
+        respond @blocked 403
+
+        @notfound {
+            path_regexp reg_notfound \/\..*$|\/errors\/.*\.xml$|theme_customization\/.*\.xml
+        }
+        respond @notfound 404
+
+        @staticPath path_regexp reg_static ^/static/(version\d*/)?(.*)$
+        handle @staticPath {
+            @static file /static/{re.reg_static.2}
+            rewrite @static /static/{re.reg_static.2}
+
+            @dynamic not file /static/{re.reg_static.2}
+            rewrite @dynamic /static.php?resource={re.reg_static.2}
+        }
+        header /media X-Frame-Options "SAMEORIGIN"
+        header /static X-Frame-Options "SAMEORIGIN"
+        header / X-Content-Type-Options "nosniff"
+
+        # Uncomment the following lines to enable Mercure and Vulcain modules
+        #mercure {
+        #       # Transport to use (default to Bolt)
+        #       transport_url {$MERCURE_TRANSPORT_URL:bolt:///data/mercure.db}
+        #       # Publisher JWT key
+        #       publisher_jwt {env.MERCURE_PUBLISHER_JWT_KEY} {env.MERCURE_PUBLISHER_JWT_ALG}
+        #       # Subscriber JWT key
+        #       subscriber_jwt {env.MERCURE_SUBSCRIBER_JWT_KEY} {env.MERCURE_SUBSCRIBER_JWT_ALG}
+        #       # Allow anonymous subscribers (double-check that it's what you want)
+        #       anonymous
+        #       # Enable the subscription API (double-check that it's what you want)
+        #       subscriptions
+        #       # Extra directives
+        #       {$MERCURE_EXTRA_DIRECTIVES}
+        #}
+        #vulcain
+
+        {$CADDY_SERVER_EXTRA_DIRECTIVES}
+
+        php_server
+}
