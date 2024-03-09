@@ -1,0 +1,24 @@
+diff --git a/src/PhpEnvironment/Request.php b/src/PhpEnvironment/Request.php
+index 7ac9b94..f58807c 100644
+
+--- a/src/PhpEnvironment/Request.php	2024-03-09 16:52:39.521856557 +0100
++++ b/src/PhpEnvironment/Request.php	2024-03-09 16:55:20.749519073 +0100
+@@ -218,18 +218,6 @@
+     {
+         $this->serverParams = $server;
+
+-        // This seems to be the only way to get the Authorization header on Apache
+-        if (function_exists('apache_request_headers')) {
+-            $apacheRequestHeaders = apache_request_headers();
+-            if (! isset($this->serverParams['HTTP_AUTHORIZATION'])) {
+-                if (isset($apacheRequestHeaders['Authorization'])) {
+-                    $this->serverParams->set('HTTP_AUTHORIZATION', $apacheRequestHeaders['Authorization']);
+-                } elseif (isset($apacheRequestHeaders['authorization'])) {
+-                    $this->serverParams->set('HTTP_AUTHORIZATION', $apacheRequestHeaders['authorization']);
+-                }
+-            }
+-        }
+-
+         // set headers
+         $headers = [];
+

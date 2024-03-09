@@ -1,3 +1,4 @@
 app/*
 .env
 !app/composer.json.sample
+!app/patches

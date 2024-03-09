@@ -11,16 +11,18 @@
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "laminas/laminas-dependency-plugin": true,
             "magento/*": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "cweagans/composer-patches": true
         },
         "preferred-install": "dist",
         "sort-packages": true
     },
     "version": "2.4.6-p4",
     "require": {
-        "magento/product-community-edition": "2.4.6-p4",
+        "cweagans/composer-patches": "^1.7",
         "magento/composer-dependency-version-audit-plugin": "~0.1",
-        "magento/composer-root-update-plugin": "~2.0"
+        "magento/composer-root-update-plugin": "~2.0",
+        "magento/product-community-edition": "2.4.6-p4"
     },
     "autoload": {
         "exclude-from-classmap": [
@@ -82,7 +84,11 @@
         }
     ],
     "extra": {
-        "magento-force": "override"
+        "magento-force": "override",
+        "patches": {
+            "laminas/laminas-http": {
+                "remove apache_request_headers call": "patches/composer/laminas-phpenvironment-request.patch"
+            }
+        }
     }
 }
-
