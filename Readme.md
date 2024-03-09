@@ -1,14 +1,12 @@
-Experimentation with FrankenPHP web server replacing nginx/apache for a Magento based website.
-
 # Requirements
 - Docker
 - Docker compose
 
 # Install step
 ```
-docker compose up
-docker compose exec --user franken -it frankenphp bash
-cd app/ && cp composer.json.sample composer.json && composer install
+docker compose up -d
+docker compose exec -it frankenphp bash
+cp composer.json.sample composer.json && composer install
 ```
 
 # Known bugs

@@ -65,7 +65,7 @@ RUN install-php-extensions \
     zip
 
 RUN curl -sS https://getcomposer.org/installer | \
-  php -- --install-dir=/usr/local/bin --filename=composer
+  php -- --install-dir=/usr/local/bin --filename=composer \
 
 RUN docker-php-ext-enable \
     imagick \
@@ -80,7 +80,9 @@ ENV DOCKER_USER=$DOCKER_USER
 ENV GROUP_ID=$GROUP_ID
 ENV USER_ID=$USER_ID
 
-RUN groupadd $DOCKER_USER -g $USER_ID && useradd $DOCKER_USER -u $GROUP_ID -g $DOCKER_USER
+RUN mkdir /home/$DOCKER_USER
+RUN groupadd $DOCKER_USER -g $USER_ID && useradd $DOCKER_USER -u $GROUP_ID -g $DOCKER_USER -d /home/$DOCKER_USER
+RUN chown -R $DOCKER_USER /home/$DOCKER_USER
 RUN chown -R $DOCKER_USER /data/caddy
 
 
