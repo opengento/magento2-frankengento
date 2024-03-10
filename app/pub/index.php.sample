@@ -1,0 +1,67 @@
+<?php
+
+use Magento\Framework\App\Bootstrap;
+
+
+
+try {
+    require __DIR__ . '/../app/bootstrap.php';
+} catch (\Exception $e) {
+    echo <<<HTML
+<div style="font:12px/1.35em arial, helvetica, sans-serif;">
+    <div style="margin:0 0 25px 0; border-bottom:1px solid #ccc;">
+        <h3 style="margin:0;font-size:1.7em;font-weight:normal;text-transform:none;text-align:left;color:#2f2f2f;">
+        Autoload error</h3>
+    </div>
+    <p>{$e->getMessage()}</p>
+</div>
+HTML;
+    http_response_code(500);
+    exit(1);
+}
+
+
+if (isset($_SERVER['FRANKENPHP_WORKER_ENABLE']) && $_SERVER['FRANKENPHP_WORKER_ENABLE'] == 1) {
+#Mode worker
+
+    $nbRequests = 0;
+    for($nbRequests = 0, $running = true; isset($_SERVER['MAX_REQUESTS']) && ($nbRequests < ((int)$_SERVER['MAX_REQUESTS'])) && $running; ++$nbRequests) {
+        frankenphp_handle_request(function () use($nbRequests): void
+        {
+
+
+            $bootstrap = Bootstrap::create(
+                BP,
+                $_SERVER);
+            $app       = $bootstrap->createApplication(\Magento\Framework\App\Http::class);
+            $bootstrap->run($app);
+
+
+            //DEBUG
+        //    echo '<div style="background: red; position: absolute; top: 0; width: 100%; text-align: center; padding: 10px;">WORKER MODE: ON ITERATION '.$nbRequests.'</div>';
+
+        });
+
+        //var_dump($running);
+
+        gc_collect_cycles();
+        \Magento\Framework\App\ObjectManager::getInstance()->get(\Magento\Framework\App\ResourceConnection::class)->closeConnection();
+
+
+    }
+
+
+} else {
+#DEFAULT MODE
+
+    $bootstrap = Bootstrap::create(
+        BP,
+        $_SERVER);
+    $app       = $bootstrap->createApplication(\Magento\Framework\App\Http::class);
+    $bootstrap->run($app);
+
+//DEBUG
+    echo '<div style="background: red; position: absolute; top: 0; width: 100%; text-align: center; padding: 10px;">$_SERVER[\'SERVER_SOFTWARE\'] : '.$_SERVER['SERVER_SOFTWARE'].'</div>';
+
+
+}

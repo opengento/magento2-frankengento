@@ -2,3 +2,7 @@ app/*
 .env
 !app/composer.json.sample
 !app/patches
+
+!app/pub/
+app/pub/*
+!app/pub/index.php.sample

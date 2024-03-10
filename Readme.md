@@ -10,6 +10,14 @@ docker compose exec -it frankenphp bash
 cp composer.json.sample composer.json && composer install
 ```
 
+### Worker mode
+You can use `pub/index.php.sample` if you want to try Worker Mode
+You well also need to make changes in env/franken.env
+```
+FRANKENPHP_WORKER_ENABLE=1
+FRANKENPHP_CONFIG="worker ./pub/index.php"
+```
+
 # Known bugs
 While we are developping a Magento Extension, you need to commented out these lines in :
 `app/vendor/laminas/laminas-http/src/PhpEnvironment/Request.php`

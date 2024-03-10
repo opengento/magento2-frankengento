@@ -70,8 +70,10 @@ RUN curl -sS https://getcomposer.org/installer | \
 RUN docker-php-ext-enable \
     imagick \
     redis \
-    ssh2 \
-    xdebug
+    ssh2
+
+
+#RUN docker-php-ext-enable xdebug
 
 ARG DOCKER_USER=franken
 ARG USER_ID
