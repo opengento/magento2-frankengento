@@ -20,48 +20,33 @@ HTML;
     exit(1);
 }
 
+$bootstrap = Bootstrap::create(
+    BP,
+    $_SERVER);
 
 if (isset($_SERVER['FRANKENPHP_WORKER_ENABLE']) && $_SERVER['FRANKENPHP_WORKER_ENABLE'] == 1) {
-#Mode worker
 
-    $nbRequests = 0;
-    for($nbRequests = 0, $running = true; isset($_SERVER['MAX_REQUESTS']) && ($nbRequests < ((int)$_SERVER['MAX_REQUESTS'])) && $running; ++$nbRequests) {
-        frankenphp_handle_request(function () use($nbRequests): void
+    $maxRequests = (int)($_SERVER['MAX_REQUESTS'] ?? 0);
+    for($nbRequests = 0; !$maxRequests || $nbRequests < $maxRequests;  ++$nbRequests) {
+        $keepRunning =  \frankenphp_handle_request(function () use($nbRequests, $bootstrap): void
         {
-
-
-            $bootstrap = Bootstrap::create(
-                BP,
-                $_SERVER);
             $app       = $bootstrap->createApplication(\Magento\Framework\App\Http::class);
             $bootstrap->run($app);
 
-
-            //DEBUG
-        //    echo '<div style="background: red; position: absolute; top: 0; width: 100%; text-align: center; padding: 10px;">WORKER MODE: ON ITERATION '.$nbRequests.'</div>';
-
         });
-
-        //var_dump($running);
 
         gc_collect_cycles();
         \Magento\Framework\App\ObjectManager::getInstance()->get(\Magento\Framework\App\ResourceConnection::class)->closeConnection();
 
-
+        if (!$keepRunning) break;
     }
-
 
 } else {
 #DEFAULT MODE
-
     $bootstrap = Bootstrap::create(
         BP,
         $_SERVER);
     $app       = $bootstrap->createApplication(\Magento\Framework\App\Http::class);
     $bootstrap->run($app);
-
-//DEBUG
-    echo '<div style="background: red; position: absolute; top: 0; width: 100%; text-align: center; padding: 10px;">$_SERVER[\'SERVER_SOFTWARE\'] : '.$_SERVER['SERVER_SOFTWARE'].'</div>';
-
 
 }
