@@ -1,3 +1,5 @@
+.idea/
+
 app/*
 .env
 !app/composer.json.sample
@@ -6,3 +8,9 @@ app/*
 !app/pub/
 app/pub/*
 !app/pub/index.php.sample
+
+!app/app/
+app/app/*
+!app/app/etc/
+app/app/etc/*
+!app/app/etc/env.php.local
