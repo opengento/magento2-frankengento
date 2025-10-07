@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\App\State\ReloadProcessorComposite">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <!-- Note: This needs to be first because it has DeploymentConfig which others require -->
+                <item name="000_Magento::config" xsi:type="object">Magento\Framework\App\State\ReloadProcessor</item>
+                <item name="Magento_ApplicationServer::config" xsi:type="object">Opengento\Frankengento\App\ReloadProcessor</item>
+                <item name="GraphQl::QueryParser" xsi:type="object">Magento\Framework\GraphQl\Query\QueryParser</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

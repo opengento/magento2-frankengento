@@ -12,6 +12,7 @@ app/pub/*
 
 !app/app/
 app/app/*
+!app/app/code
 !app/app/etc/
 app/app/etc/*
 !app/app/etc/env.php.local
