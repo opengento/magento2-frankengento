@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp:latest-php8.2 as builder
+FROM dunglas/frankenphp:latest-php8.3 as builder
 
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 

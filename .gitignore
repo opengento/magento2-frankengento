@@ -8,6 +8,7 @@ app/*
 !app/pub/
 app/pub/*
 !app/pub/index.php.sample
+!app/pub/worker.php
 
 !app/app/
 app/app/*
