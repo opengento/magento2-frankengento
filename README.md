@@ -11,11 +11,11 @@ cp composer.json.sample composer.json && composer install
 ```
 
 ### Worker mode
-You can use `pub/index.php.sample` if you want to try Worker Mode
-You well also need to make changes in env/franken.env
+In our demo we use `pub/worker.php` for the FrankePHP Worker Mode.
+We made these changes in env/franken.env
 ```
 FRANKENPHP_WORKER_ENABLE=1
-FRANKENPHP_CONFIG="worker ./pub/index.php"
+FRANKENPHP_CONFIG="worker ./pub/worker.php"
 ```
 
 # Known bugs
