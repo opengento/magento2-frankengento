@@ -1,8 +1,0 @@
-<?php
-try {
-    if ($_SERVER['FRANKENPHP_WORKER_ENABLE'] ?? false) {
-        require __DIR__ . '/worker.php';
-    }
-} catch (\Throwable $e) {
-    echo $e->getMessage();
-}

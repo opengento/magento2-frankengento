@@ -2,17 +2,12 @@
 
 app/*
 .env
-!app/composer.json.sample
+!app/composer.json
 !app/patches
 
-!app/pub/
-app/pub/*
-!app/pub/index.php.sample
-!app/pub/worker.php
 
 !app/app/
 app/app/*
-!app/app/code
 !app/app/etc/
 app/app/etc/*
 !app/app/etc/env.php.local
