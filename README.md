@@ -2,6 +2,10 @@
 - Docker
 - Docker compose
 
+# Dependencies
+- https://github.com/opengento/magento2-frankenphp-base
+- https://github.com/opengento/magento2-application
+
 # Install step
 ```
 cp .env.sample .env
