@@ -14,7 +14,8 @@ $handler = static function () use ($bootstrapPool): void {
         if ($app !== null) {
             $bootstrap->run($app);
         }
-    } catch (LocalizedException) {
+    } catch (LocalizedException $e) {
+        echo $e->getMessage();
         exit(1);
     }
 };
