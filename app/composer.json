@@ -13,7 +13,8 @@
       "magento/*": true,
       "php-http/discovery": true,
       "magento/magento-composer-installer": true,
-      "magento/inventory-composer-installer": true
+      "magento/inventory-composer-installer": true,
+      "cweagans/composer-patches": true
     },
     "preferred-install": "dist",
     "sort-packages": true

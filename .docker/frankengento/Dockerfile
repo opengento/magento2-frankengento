@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp:latest-php8.3 as builder
+FROM dunglas/frankenphp:latest-php8.3 AS builder
 
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 
@@ -90,4 +90,4 @@ USER $DOCKER_USER
 VOLUME /var/www
 WORKDIR /var/www
 
-CMD ["frankenphp", "run", "--config", "/config/Caddyfile", "worker.php"]
+CMD ["frankenphp", "run", "--config", "/config/Caddyfile", "index.php"]
