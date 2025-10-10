@@ -3,8 +3,7 @@
 app/*
 .env
 !app/composer.json
-!app/patches
-
+!app/m2-hotfixes
 
 !app/app/
 app/app/*

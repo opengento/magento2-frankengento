@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp:latest-php8.3 AS builder
+FROM dunglas/frankenphp:php8.4 AS builder
 
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 
@@ -43,6 +43,7 @@ RUN pecl channel-update pecl.php.net && pecl install \
   && rm -rf /tmp/pear
 
 RUN install-php-extensions \
+    ftp \
     bcmath \
     bz2 \
     calendar \

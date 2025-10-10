@@ -1,8 +1,8 @@
-diff --git a/src/PhpEnvironment/Request.php b/src/PhpEnvironment/Request.php
+diff --git a/vendor/laminas/laminas-http/src/PhpEnvironment/Request.php b/vendor/laminas/laminas-http/src/PhpEnvironment/Request.php
 index 7ac9b94..f58807c 100644
 
---- a/src/PhpEnvironment/Request.php	2024-03-09 16:52:39.521856557 +0100
-+++ b/src/PhpEnvironment/Request.php	2024-03-09 16:55:20.749519073 +0100
+--- a/vendor/laminas/laminas-http/src/PhpEnvironment/Request.php	2024-03-09 16:52:39.521856557 +0100
++++ b/vendor/laminas/laminas-http/src/PhpEnvironment/Request.php	2024-03-09 16:55:20.749519073 +0100
 @@ -218,18 +218,6 @@
      {
          $this->serverParams = $server;
