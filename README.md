@@ -34,13 +34,7 @@ cp app/etc/env.php.local app/etc/env.php
 bin/magento se:up
 ```
 
-### Worker mode
-In our demo we use `pub/worker.php` for the FrankePHP Worker Mode.
-We made these changes in env/franken.env
-```
-FRANKENPHP_WORKER_ENABLE=1
-FRANKENPHP_CONFIG="worker ./pub/worker.php"
-```
+You need to restart the container after completing the Magento installation.
 
 # Known bugs
 While we are developping a Magento Extension, you need to commented out these lines in :
