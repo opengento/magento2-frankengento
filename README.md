@@ -14,7 +14,7 @@ docker compose exec frankenphp bash
 composer install
 bin/magento setup:install \
     --base-url=https://localhost \
-    --db-host=fdb \
+    --db-host=db \
     --db-name=magento \
     --db-user=magento \
     --db-password=magento \
@@ -22,15 +22,14 @@ bin/magento setup:install \
     --admin-lastname=Admin \
     --admin-email=admin@example.com \
     --admin-user=admin \
-    --admin-password=12345 \
+    --admin-password=Magent0! \
     --language=en_US \
     --currency=USD \
     --timezone=America/Chicago \
     --use-rewrites=1 \
     --search-engine=opensearch \
-    --opensearch-host=fopensearch \
+    --opensearch-host=opensearch \
     --opensearch-port=9200
-cp app/etc/env.php.local app/etc/env.php
 bin/magento se:up
 ```
 

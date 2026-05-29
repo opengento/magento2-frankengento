@@ -1,6 +1,5 @@
 services:
   frankenphp:
-    image: frankengento
     build:
       dockerfile: .docker/frankengento/Dockerfile
       args:

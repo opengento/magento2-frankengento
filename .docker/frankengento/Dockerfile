@@ -91,5 +91,5 @@ USER $DOCKER_USER
 VOLUME /var/www
 WORKDIR /var/www
 
-CMD ["frankenphp", "run", "--config", "/config/Caddyfile", "index.php"]
-CMD ["frankenphp", "run", "--config", "/config/Caddyfile", "static.php"]
+CMD ["frankenphp", "run", "--config", "/config/Caddyfile", "/var/www/pub/index.php"]
+CMD ["frankenphp", "run", "--config", "/config/Caddyfile", "/var/www/pub/static.php"]
