@@ -18,6 +18,7 @@ bin/magento setup:install \
     --db-name=magento \
     --db-user=magento \
     --db-password=magento \
+    --backend-frontname=admin \
     --admin-firstname=Magento \
     --admin-lastname=Admin \
     --admin-email=admin@example.com \
