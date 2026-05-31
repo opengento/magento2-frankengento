@@ -1,6 +1,5 @@
 # Requirements
 - Docker
-- Docker compose
 
 # Dependencies
 - https://github.com/opengento/magento2-frankenphp-base
@@ -30,7 +29,19 @@ bin/magento setup:install \
     --use-rewrites=1 \
     --search-engine=opensearch \
     --opensearch-host=opensearch \
-    --opensearch-port=9200
+    --opensearch-port=9200 \
+    --cache-backend redis \
+    --cache-backend-redis-server redis \
+    --cache-backend-redis-port 6379 \
+    --cache-backend-redis-db 0 \
+    --page-cache=redis \
+    --page-cache-redis-server redis \
+    --page-cache-redis-port 6379 \
+    --page-cache-redis-db=1 \
+    --session-save=redis
+    --session-save-redis-host redis \
+    --session-save-redis-port 6379 \
+    --session-save-redis-db 2
 bin/magento se:up
 ```
 
