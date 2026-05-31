@@ -43,6 +43,12 @@
             @dynamic not file /static/{re.reg_static.2}
             rewrite @dynamic /static.php?resource={re.reg_static.2}
         }
+
+        @media path /media/*
+        handle @media {
+            try_files {path} /get.php
+        }
+
         header /media X-Frame-Options "SAMEORIGIN"
         header /static X-Frame-Options "SAMEORIGIN"
         header / X-Content-Type-Options "nosniff"

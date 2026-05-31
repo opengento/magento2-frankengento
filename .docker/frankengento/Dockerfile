@@ -92,4 +92,5 @@ VOLUME /var/www
 WORKDIR /var/www
 
 CMD ["frankenphp", "run", "--config", "/config/Caddyfile", "/var/www/pub/index.php"]
+CMD ["frankenphp", "run", "--config", "/config/Caddyfile", "/var/www/pub/get.php"]
 CMD ["frankenphp", "run", "--config", "/config/Caddyfile", "/var/www/pub/static.php"]
