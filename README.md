@@ -38,7 +38,7 @@ bin/magento setup:install \
     --page-cache-redis-server redis \
     --page-cache-redis-port 6379 \
     --page-cache-redis-db=1 \
-    --session-save=redis
+    --session-save=redis \
     --session-save-redis-host redis \
     --session-save-redis-port 6379 \
     --session-save-redis-db 2

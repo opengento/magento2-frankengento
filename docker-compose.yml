@@ -24,7 +24,7 @@ services:
       - host.docker.internal:host-gateway
     env_file: env/franken.env
   db:
-    image: mariadb:10.6
+    image: mariadb:12
     command:
       --max_allowed_packet=64M
       --optimizer_use_condition_selectivity=1
@@ -41,7 +41,7 @@ services:
       - "6379:6379"
 
   opensearch:
-    image: markoshust/magento-opensearch:2.5-1
+    image: markoshust/magento-opensearch:3
     ports:
       - "9200:9200"
       - "9300:9300"

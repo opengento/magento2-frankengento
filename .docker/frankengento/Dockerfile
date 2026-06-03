@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp:php8.4 AS builder
+FROM dunglas/frankenphp:php8.5 AS builder
 
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 
@@ -86,7 +86,6 @@ ENV USER_ID=$USER_ID
 RUN groupadd $DOCKER_USER -g $USER_ID && useradd $DOCKER_USER -u $GROUP_ID -g $DOCKER_USER
 RUN chown -R $DOCKER_USER /data/caddy
 
-
 USER $DOCKER_USER
 VOLUME /var/www
 WORKDIR /var/www
@@ -94,3 +93,4 @@ WORKDIR /var/www
 CMD ["frankenphp", "run", "--config", "/config/Caddyfile", "/var/www/pub/index.php"]
 CMD ["frankenphp", "run", "--config", "/config/Caddyfile", "/var/www/pub/get.php"]
 CMD ["frankenphp", "run", "--config", "/config/Caddyfile", "/var/www/pub/static.php"]
+#CMD ["frankenphp", "run", "--config", "/config/Caddyfile", "--watch" ]
