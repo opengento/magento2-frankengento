@@ -39,10 +39,13 @@
         "magento/module-theme-sample-data": "*",
         "magento/module-widget-sample-data": "*",
         "magento/module-wishlist-sample-data": "*",
-        "magento/product-community-edition": "2.4.8-p2",
+        "magento/product-community-edition": "^2.4.9",
         "magento/quality-patches": "*",
         "magento/sample-data-media": "*",
-        "opengento/magento2-frankenphp-plugin": "*"
+        "opengento/magento2-frankenphp-base": "*"
+    },
+    "replace": {
+        "opengento/module-application": "*"
     },
     "autoload": {
         "exclude-from-classmap": [
@@ -62,20 +65,6 @@
         "psr-4": {
             "Magento\\Setup\\": "setup/src/Magento/Setup/"
         }
-    },
-    "require-dev": {
-        "magento/magento-allure-phpunit": "^3.0.2",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7 || ^1.0",
-        "dg/bypass-finals": "^1.4",
-        "friendsofphp/php-cs-fixer": "^3.22",
-        "carlos-mg89/oauth": "^0.8.17",
-        "magento/magento-coding-standard": "*",
-        "magento/magento2-functional-testing-framework": "^5.0",
-        "pdepend/pdepend": "3.x-dev",
-        "phpmd/phpmd": "3.x-dev",
-        "phpstan/phpstan": "^1.9",
-        "phpunit/phpunit": "^10.5",
-        "symfony/finder": "^6.4"
     },
     "conflict": {
         "gene/bluefoot": "*"
